@@ -1,0 +1,126 @@
+{% extends "main/layout.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block mainContent %}
+
+{% block titlepage %} 
+{% blocktranslate %}  "List of spare parts " {% endblocktranslate %} 
+         
+{% endblock%}
+<hr>
+<div class="row" style="padding-top:10px; padding-bottom:5px;"> 
+
+    <div class="flex   center" style="background-color:#FFC500"> 
+        
+        <div class="col-md-8">
+            <form action="" method="GET" style=" color:black; ">
+                {{ searchForm }}
+                <button type="submit" class="btn btn-success"> {% translate "Search" %}</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-success" href="/createpart"> {% translate "New" %} </a>
+        </div>
+        <div class="col-md-2"></div>        
+    </div>
+
+    <div class="col-md-2">
+        <h3>{% translate "name" %} </h3>
+    </div>
+    <div class="col-md-1">
+        <h3>{% translate "model" %} </h3>
+    </div>
+    <div class="col-md-1">
+        <h3> {% translate "code" %}  </h3>
+    </div>
+    <div class="col-md-2">
+        <h3> {% translate "country" %}</h3>
+    </div>
+    <div class="col-md-1">
+        <h3>{% translate "amount" %}</h3>
+    </div>
+    <div class="col-md-1">
+        <h3> {% translate "store" %}</h3>
+    </div>
+    <div class="col-md-2">
+        <h3> {% translate "image" %}</h3>
+    </div>
+    <div class="col-md-2">
+        <h3> {% translate "operation" %}</h3>
+    </div>
+    
+    <hr>
+ 
+</div>
+        {% for location in result %}
+        
+            <div class="row location" style="padding-top:10px;">
+                    
+                     <div class="col-md-2">
+                        {{ location.Name}}
+                     </div>
+                     <div class="col-md-1">
+                        {{ location.VehicleName}}
+                     </div>
+                     <div class="col-md-1">
+                        {{ location.Code}}
+                     </div>
+                     <div class="col-md-2">
+                        {{ location.MadeIn}}
+                     </div>
+                     <div class="col-md-1">
+                        {{ location.Amount}}
+                     </div>
+                     <div class="col-md-1">
+                        {{ location.Place}}
+                     </div>
+                     <div class="col-md-2">
+                        <div class="imageBox">
+                            <img src="{{ location.Picture.url }}" style="width: 50px; height: 50px;">
+                       </div>
+                     </div>
+                     <div class="col-md-2">
+                        <a href=" {%  url 'updatepart'  location.id %}" class="btn btn-info" >{% translate "Update" %}</a>
+                        <a href=" {%  url 'deletepart'  location.id %}" class="btn btn-warning" >{% translate "Delete" %}</a>
+                     </div>
+                     
+            </div>
+        {% endfor %}
+
+        <!-- code for pagination buttons -->
+            <div class="pagination center">
+                {% if result.has_other_pages %}
+                    <ul class="pagination">
+                        {% if result.has_previous %}
+                        <li><a href="?page={{ result.previous_page_number }}">&raquo; Pre</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&raquo; First</span> </li>
+                        {% endif %}
+
+                        {% for i in result.paginator.page_range %}
+                            {% if result.number == i %}
+                            <li class="active"><span>{{ i }} </span></li>
+                            {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a> </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if result.has_next %}
+                            <li><a href="?page={{ result.next_page_number}}"> &laquo; Next</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&laquo; Last</span></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+<div class="right">
+    <button class="right" onclick="topFunction()" id="myBtn" title="Go to top"> {% translate " UP" %} </button>
+</div>
+<script> 
+</script>
+
+</div>
+
+{% endblock%}
+               
+           

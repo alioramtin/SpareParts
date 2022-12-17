@@ -1,0 +1,14 @@
+{% extends "main/layout.html" %}
+{% load static %}
+{% load i18n %}
+
+
+{% block mainContent %}
+{% block titlepage %} 
+Error     
+{% endblock%}
+<hr>
+<h1>error page</h1>
+<h1 style="color:red;"> {% blocktranslate %}  " There is a fell in your order!!!!" {% endblocktranslate %}  
+    </h1>
+{% endblock%}

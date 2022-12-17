@@ -1,0 +1,48 @@
+
+ {% load static %}
+
+{% block titlepage %} 
+   <title> Sell factor</title>     
+{% endblock%}
+
+{% block mainContent %}
+<h3 class="center" style="text-align: center;"> Sell factor</h3>     
+<hr>
+
+<div class="container" >
+    
+   <div class="row" >
+   <h1> Rah Loader Co.</h1>     
+   <hr>
+
+   <table class="table">
+       <thead >
+           <th style="flex: 1;text-align: center;">customer_id </th>
+           <th style="flex: 1;text-align: center;">part_id </th>
+           <th style="flex: 1;text-align: center;">Code </th>
+           <th style="flex: 1;text-align: center;">single_price</th>  
+           <th style="flex: 1;text-align: center;">amount</th>  
+           <th style="flex: 1;text-align: center;">total_price</th>  
+
+       </thead>
+       {% for part in parts %}
+       <tr>
+
+         <td style="flex: 1;text-align: center;">{{ part.customer_id }}</td>
+         <td style="flex: 1;text-align: center;">{{ part.part_id }}</td>
+         <td style="flex: 1;text-align: center;">{{ part.Code }}</td>
+         <td style="flex: 1;text-align: center;">{{ part.single_price }}</td>
+         <td style="flex: 1;text-align: center;">{{ part.amount }}</td>
+         <td style="flex: 1;text-align: center;">{{ part.total_price }}</td>            
+           
+       </tr>
+
+       {% endfor %}
+   </table>  
+   <hr>
+
+   </div>    
+</div>
+
+{% endblock%}
+

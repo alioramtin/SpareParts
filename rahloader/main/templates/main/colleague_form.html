@@ -1,0 +1,22 @@
+{% extends "main/layout.html" %}
+{% block mainContent %}
+
+
+
+<div class="row" style="padding-top:10px; padding-bottom:50px;"> 
+  {% block titlepage %} 
+  New colleague  
+  {% endblock%}
+  <hr>
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+        {{ form.as_p }}
+      
+      
+      <input type="submit" value="Submit" class="btn btn-success">
+  </form>
+</div>
+
+{% endblock%}
+               
+           

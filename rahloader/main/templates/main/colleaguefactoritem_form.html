@@ -1,0 +1,18 @@
+{% extends "main/layout.html" %}
+
+
+{% block mainContent %}
+{% block titlepage %} 
+    New single colleague invoice 
+{% endblock%}
+<hr>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+      {{ form.as_p }} 
+    
+      <input type="submit" value="Submit" class="btn btn-success">
+</form>
+
+{% endblock%}
+               
+           

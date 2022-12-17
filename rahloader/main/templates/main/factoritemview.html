@@ -1,0 +1,112 @@
+{% extends "main/layout.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block mainContent %}
+
+{% block titlepage %} 
+
+{% blocktranslate %}  "list of sellings " {% endblocktranslate %}  
+
+{% endblock%}
+<hr>
+<div class="row" style="padding-top:10px; padding-bottom:50px;"> 
+
+    <div class="flex   center" style="background-color:#FFC500"> 
+        <div class="col-md-8">
+            <form action="" method="GET" style=" color:black; ">
+                {{ searchForm }}
+                <button type="submit" class="btn btn-success"> {% translate "Search" %}</button>
+            </form>
+        </div>
+         
+        <div class="col-md-2">
+            <a class="btn btn-success" href="/create_factor_item"> {% translate "New" %} </a>
+        </div>
+        
+        
+        <div class="col-md-2">
+            <a href="{% url 'Sell_Export_PDF' %}"class="btn btn-success">Sell_Export_PDF</a>
+        </div> 
+
+    </div>
+    <div>
+        <div class="container">
+            <br >
+            <div class="row">
+                <br>
+                <div class="col-md-1"> {% translate "name" %}  </div>
+                <div class="col-md-1"> {% translate "part" %}    </div>
+                <div class="col-md-1">{% translate "model" %}  </div>
+                <div class="col-md-1"> {% translate "code" %}  </div>
+                <div class="col-md-1">{% translate "country" %}  </div>
+                <div class="col-md-1"> {% translate "code" %}  </div>
+                <div class="col-md-1"> {% translate "sPrice" %}   </div>
+                <div class="col-md-1"> {% translate "amount" %}  </div>
+                <div class="col-md-1"> {% translate "tPrice" %} </div>
+                <div class="col-md-1">{% translate "date" %} </div>
+                <div class="col-md-2"> {% translate "operation" %}  </div>
+                <hr>
+            </div>
+            </hr>    
+                {% for part in result %}
+                <div class="row">
+                    <div class="col-md-1">{{ part.customer_id.Company }}</div>
+                    <div class="col-md-1">{{ part.part_id.Name }}</div>
+                    <div class="col-md-1">{{ part.part_id.VehicleName }}</div>
+                        <div class="col-md-1">{{ part.part_id.Code}}</div>
+                        <div class="col-md-1">{{ part.part_id.MadeIn }}</div>
+                        <div class="col-md-1">{{ part.Code }}</div>
+                        <div class="col-md-1">{{ part.single_price }}</div>
+                        <div class="col-md-1">{{ part.amount }}</div>
+                        <div class="col-md-1">{{ part.total_price }}</div>        
+                        <div class="col-md-1">{{ part.date_factor }}</div>        
+                        <div class="col-md-2"> 
+                            <a href=" {%  url 'update_factor_item'  part.id  %}" class="btn btn-info" >{% translate "Update" %}</a>
+                            <a href=" {%  url 'deletefactoritem'  part.id %}" class="btn btn-warning" >{% translate "Delete" %}</a>
+
+                        </div>
+                    <hr>
+                </div>
+
+            {% endfor %}
+        </div>      
+    </div>
+</div>
+      
+
+<script> 
+</script>
+ <!-- code for pagination buttons -->
+ <div class="pagination center">
+    {% if result.has_other_pages %}
+        <ul class="pagination">
+            {% if result.has_previous %}
+            <li><a href="?page={{ result.previous_page_number }}">&raquo; Pre</a></li>
+            {% else %}
+            <li class="disabled"><span>&raquo; First</span> </li>
+            {% endif %}
+
+            {% for i in result.paginator.page_range %}
+                {% if result.number == i %}
+                <li class="active"><span>{{ i }} </span></li>
+                {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a> </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if result.has_next %}
+                <li><a href="?page={{ result.next_page_number}}"> &laquo; Next</a></li>
+            {% else %}
+            <li class="disabled"><span>&laquo; Last</span></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+<div class="right">
+    <button class="right" onclick="topFunction()" id="myBtn" title="Go to top"> {% translate " UP" %} </button>
+    </div>
+</div>
+
+{% endblock%}
+       
+   

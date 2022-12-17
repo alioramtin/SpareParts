@@ -1,0 +1,117 @@
+{% extends "main/layout.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block mainContent %}
+
+{% block titlepage %} 
+{% blocktranslate %}  "list of customers " {% endblocktranslate %}  
+   
+{% endblock%}
+<hr>
+<div  class="row" style="padding-top:10px; padding-bottom:5px;"> 
+    <div class="flex   center" style="background-color:#FFC500"> 
+        <div class="col-md-8">
+            <form action="" method="GET" style=" color:black; ">
+                {{ searchForm }}
+                <button type="submit" class="btn btn-success"> {% translate "Search" %}</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-success" href="/createcustomer"> {% translate "New" %}</a>
+        </div>
+        
+     </div>
+    <div class="col-md-1">
+        <h3>  {% translate "code" %} </h3>
+    </div>
+    <div class="col-md-1">
+        <h3> {% translate "name" %}</h3>
+    </div>
+    <div class="col-md-2">
+        <h3>{% translate "family" %}   </h3>
+    </div>
+    <div class="col-md-1">
+        <h3> {% translate "company" %}  </h3>
+    </div>
+    <div class="col-md-3">
+        <h3> {% translate "address" %}</h3>
+    </div>
+    <div class="col-md-2">
+        <h3>{% translate "phone" %}</h3>
+    </div>
+    <div class="col-md-2">
+        <h3> {% translate "operation" %}</h3>
+    </div> 
+<hr>
+</div>
+        {% for location in result %}
+        
+        <div class="row " >
+                     
+                     <div class="col-md-1">
+                        {{ location.Code}}
+                     </div>
+                     <div class="col-md-1  ">
+                        {{ location.Name}}
+                     </div>
+                     <div class="col-md-2" >
+                        {{ location.Family}}
+                     </div>
+                     <div class="col-md-1">
+                        {{ location.Company}}
+                     </div>
+                     <div class="col-md-3">
+                        {{ location.Address}}
+                    </div>
+                     <div class="col-md-2">
+                        {{ location.Phone}}
+
+                     </div>
+                     <div class="col-md-2">
+                        <a href=" {%  url 'invoice'  location.id %}" class="btn btn-success" >{% translate "invo" %}</a>
+                        <a href=" {%  url 'updatecustomer'  location.id %}" class="btn btn-info" >{% translate "edit" %}</a>
+                        <a href=" {%  url 'deletecustomer'  location.id %}" class="btn btn-warning">{% translate "del" %} </a>
+                     </div>
+                     <hr>
+            </div>
+        {% endfor %}
+
+      
+       <!-- code for pagination buttons -->
+       <div class="pagination center">
+        {% if result.has_other_pages %}
+            <ul class="pagination">
+                {% if result.has_previous %}
+                <li><a href="?page={{ result.previous_page_number }}">&raquo; Pre</a></li>
+                {% else %}
+                <li class="disabled"><span>&raquo; First</span> </li>
+                {% endif %}
+
+                {% for i in result.paginator.page_range %}
+                    {% if result.number == i %}
+                    <li class="active"><span>{{ i }} </span></li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a> </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if result.has_next %}
+                    <li><a href="?page={{ result.next_page_number}}"> &laquo; Next</a></li>
+                {% else %}
+                <li class="disabled"><span>&laquo; Last</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+
+<script> 
+</script>
+<div class="right">
+    <button class="right" onclick="topFunction()" id="myBtn" title="Go to top"> {% translate " UP" %} </button>
+    </div>
+
+</div>
+
+{% endblock%}
+       
+   

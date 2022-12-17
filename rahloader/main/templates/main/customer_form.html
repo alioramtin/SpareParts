@@ -1,0 +1,22 @@
+{% extends "main/layout.html" %}
+{% block mainContent %}
+
+{% block titlepage %} 
+    new customer    
+{% endblock%}
+<hr>
+<div class="row" style="padding-top:10px; padding-bottom:50px;"> 
+
+  <hr>
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+        {{ form.as_p }}
+      
+      
+        <input type="submit" value="Submit" class="btn btn-success">
+      </form>
+</div>
+
+{% endblock%}
+               
+           

@@ -1,0 +1,21 @@
+
+{% extends "main/layout.html" %}
+ {% load i18n %}
+{% load static %}
+{% block mainContent %}
+
+{% block titlepage %} 
+    {% translate "test" %}     
+{% endblock%}
+
+<hr> 
+{% translate "Book" %}
+
+{% blocktranslate %}  "My good Book" {% endblocktranslate %}
+
+<h1>{% get_current_language as LANGUAGE_CODE %}</h1>
+ <div class="container">
+
+   
+
+{% endblock%}

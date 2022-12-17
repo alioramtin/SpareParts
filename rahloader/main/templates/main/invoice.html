@@ -1,0 +1,40 @@
+{% extends "main/layout.html" %}
+{% block mainContent %}
+
+{% block titlepage %} 
+invoice    
+{% endblock%}
+<hr>
+<div class="row" style="padding-top:10px; padding-bottom:50px;"> 
+<h1> Factor </h1>
+<br>
+<hr>
+<h3>Customer    </h3>
+<br>
+<hr>
+
+<br>
+<hr>  
+{{ customer }}
+<br>
+<hr>
+<h3>   Info  </h3>
+<br>
+<hr>
+  <form method="POST">
+     {% csrf_token %}
+     {{ formset.as_p }}
+     <hr>
+     <button class="btn btn-success" type="submit">Save</button>
+    </form>   
+</div>
+
+
+<div class="right">
+  <button class="right" onclick="topFunction()" id="myBtn" title="Go to top">برو بالا </button>
+</div>
+<script> 
+</script>
+{% endblock%}
+               
+           

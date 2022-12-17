@@ -1,0 +1,75 @@
+
+{% extends "main/layout.html" %}
+{% load i18n %}
+{% load static %}
+{% block mainContent %}
+
+{% block titlepage %} 
+{% blocktranslate %}  "Selling factors by searching customer information" {% endblocktranslate %}  
+{% endblock%}
+
+<hr> 
+
+<h1>{% get_current_language as LANGUAGE_CODE %}</h1>
+<div class="container">
+  <div  class="row" style="padding-bottom:5px;"> 
+
+      <div class="flex   center" style="background-color:#FFC500"> 
+        <div class="col-md-8">
+              <form action="" method="GET" action="" enctype="multipart/form-data" style=" color:black; ">
+                {{ sellFactorForm  }}
+                <button type="submit" class="btn btn-success"> {% translate "Search" %}</button>
+              </form>
+        </div>
+        <div class="col-md-4"> </div>   
+        
+       </div>
+  </div> 
+
+       {% if parts %}
+       
+         <h3>Customers and selling factors information</h3>     
+         <hr>
+
+       <div  class="container center">  
+
+         <Div class="row center" style="border: 2px solid black; ">           
+           <div class="col-md-1" style="border: 1px solid black; background-color:rgb(195, 191, 191);">{% translate "code" %} </div>
+           <div class="col-md-1" style="border: 1px solid black; background-color:rgb(195, 191, 191);">{% translate "Company" %}</div>
+           <div class="col-md-2" style="border: 1px solid black;">{% translate "Part" %} </div>
+           <div class="col-md-1" style="border: 1px solid black;">{% translate "model" %} </div>
+           <div class="col-md-1" style="border: 1px solid black;">{% translate "Code" %} </div> 
+           <div class="col-md-1" style="border: 1px solid black;">{% translate "MadeIn" %} </div>
+           <div class="col-md-1" style="border: 1px solid black;">{% translate "sPrice" %} </div>
+           <div class="col-md-1" style="border: 1px solid black;">{% translate "amount" %} </div>
+           <div class="col-md-1" style="border: 1px solid black;">{% translate "tPrice" %} </div>
+           <div class="col-md-2" style="border: 1px solid black;">{% translate "date" %} </div>
+         </div>
+         <hr>
+         {% for part in parts %}
+         <Div class="row center" style="border: 1px solid black;">           
+           <div class="col-md-1" style="border: 1px solid black;">{{ part.customer_id.Code }} </div> 
+           <div class="col-md-1" style="border: 1px solid black;">{{ part.customer_id.Company }} </div> 
+           <div class="col-md-2" style="border: 1px solid black;">{{ part.part_id.Name }} </div> 
+           <div class="col-md-1" style="border: 1px solid black;">{{ part.part_id.VehicleName }} </div> 
+           <div class="col-md-1" style="border: 1px solid black;">{{ part.part_id.Code }} </div> 
+           <div class="col-md-1" style="border: 1px solid black;">{{ part.part_id.MadeIn }} </div> 
+           <div class="col-md-1" style="border: 1px solid black;">{{ part.single_price }} </div> 
+           <div class="col-md-1" style="border: 1px solid black;">{{ part.amount }} </div> 
+           <div class="col-md-1" style="border: 1px solid black;">{{ part.total_price }} </div> 
+           <div class="col-md-2" style="border: 1px solid black;">{{ part.date_factor }} </div> 
+         </div>
+       
+         {% endfor %}
+       </div>
+       {% endif %}
+
+
+       <div class="right">
+        <button class="right" onclick="topFunction()" id="myBtn" title="Go to top">{% translate " UP" %}    </button>
+    </div>
+
+</div>
+  
+
+{% endblock%}

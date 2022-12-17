@@ -1,0 +1,121 @@
+{% load i18n %}
+
+{% load static %}
+<!DOCTYPE html>
+<html  >
+    <head>
+        <title>Rah loader co</title>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.css' %} " >
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %} " >
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/fontawesome.css' %} " >
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %} " > 
+ 
+    </head>
+    <body>
+          
+        <div class="container"  style="padding-bottom:50px;">
+
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+              <div class="col-md-1">
+                <a class="navbar-brand" href="/">
+                  <img src="{% static 'main/img/logo.png' %}" 
+                  style="width: 70px; height: 70px; 
+                  vertical-align: middle; position: absolute;
+                  top: 0; bottom: 0; margin: auto;">
+                </a>
+              </div>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+            
+                    <li class="nav-item active">
+                      <a class="nav-link" href="/"> 
+                        {% translate "Home " %}
+                        <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/partsview">  
+                        {% translate "parts " %}
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/customersview">
+                          {% translate "Customers " %}
+
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/factoritemview">
+                          {% translate "Sellings" %}
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/sell_factor"> 
+                          {% translate "SellingFactor" %}
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/colleaguesview">
+                          {% translate "Colleagues " %}  
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/colleaguefactoritemview">
+                          {% translate "Buyings" %}                      
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/buy_factor">
+                          {% translate "BuyingFactor" %}
+
+                       </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/test"> 
+                          {% translate "test " %}
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                       
+                        <div style="padding-left:50px; padding-top:11px;">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                                <form action="{% url 'set_language' %}" method="POST">
+                                  {% csrf_token %}
+                                  <input name="next" type="hidden" value="{{ redirect_to }}">
+                                  <select name="language" onchange="this.form.submit()">
+                                    {% for language in languages %}
+                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                    {{ language.name_local }} | ({{ language.code }}) 
+                                    </option>
+                                    {% endfor %}
+                                  </select>
+                                  
+                                </form>
+                        </div>
+                      </li>
+                      
+                  </ul>
+                </div>
+              </nav>
+
+            <div class="row">                
+                  {% block mainContent %}                  
+                  {% endblock%}               
+            </div>
+            
+        </div>
+        {% include "main/footer.html" %} 
+
+    </body>
+
+    <script src="{% static 'main/js/jquery-3.6.1.min.js' %} " ></script>
+    <script src="{% static 'main/js/bootstrap.bundle.js' %} " ></script>
+    <script src="{% static 'main/js/fontawesome.js' %} " ></script>
+    <script src="{% static 'main/js/main.js' %} " ></script>
+</html>

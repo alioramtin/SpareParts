@@ -1,0 +1,15 @@
+pip install xlwt
+pip install xhtml2pdf 
+pip install django_translation_flags
+
+
+
+{% load i18n %}
+{% translate " " %}                      
+{% blocktranslate %}  " " {% endblocktranslate %}  
+django-admin makemessages -l fa
+django-admin compilemessages 
+
+ {% translate "Search" %}
+ {% translate " UP" %} 
+ {% translate "New" %}
